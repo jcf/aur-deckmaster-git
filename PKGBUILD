@@ -11,8 +11,14 @@ depends=('ttf-roboto')
 makedepends=('git' 'go')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=($pkgname::"git://github.com/muesli/${pkgname%-git}.git")
-sha256sums=('SKIP')
+source=($pkgname::"git://github.com/muesli/${pkgname%-git}.git"
+        'deckmaster@.path'
+        'deckmaster@.service'
+        '60-elgato-stream-deck.rules')
+sha256sums=('SKIP'
+            'f6bbd3ace28aabd7fb9af80d7d99483c3ab3c193c298520a873d3945e882a62c'
+            '6f0e6637ccdf34f7cf3cb9d165a181abbda8012a25fc50949f12853dd553bfca'
+            '0344805537572dec2ae217e17fcc284a4544d1281d5d5edaf2b81b684ad836f3')
 
 pkgver() {
     cd "$srcdir/$pkgname"
@@ -46,4 +52,10 @@ package() {
 
     install -Dm755 "${pkgname%-git}" "$pkgdir/usr/bin/${pkgname%-git}"
     install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/${pkgname%-git}/LICENSE"
+
+    install -Dm644 -t "${pkgdir}"/usr/lib/systemd/user/ \
+      "${srcdir}"/deckmaster@.path "${srcdir}"/deckmaster@.service
+
+    install -Dm644 -t "${pkgdir}"/usr/lib/udev/rules.d/ \
+      "${srcdir}"/60-elgato-stream-deck.rules
 }

@@ -1,0 +1,10 @@
+[Unit]
+Description=Deckmaster Service
+
+[Service]
+ExecStart=/usr/bin/deckmaster --deck %E/deckmaster/%i.deck
+WorkingDirectory=%E/deckmaster/
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
