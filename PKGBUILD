@@ -1,7 +1,7 @@
 # Maintainer: Christian Muehlhaeuser <muesli at gmail dot com>
 
 pkgname=deckmaster-git
-pkgver=r87.9328b84
+pkgver=r99.55628fd
 pkgrel=1
 pkgdesc="An application to control your Elgato Stream Deck"
 arch=('x86_64' 'i686' 'armv6h' 'armv7h' 'aarch64')
